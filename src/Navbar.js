@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "./Slider";
-import MaterialSelect from "./MaterialSelect";
+import MaterialSelect from "./Material/MaterialSelect";
 import "./Navbar.css";
 
 const Navbar = ({ level, changeLevel, format, changeFormatHandler }) => {
