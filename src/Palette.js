@@ -4,7 +4,8 @@ import ColorBox from "./ColorBox";
 import "./Palette.css";
 
 function Palette({ palette, level, format }) {
-  const colorBoxes = palette.colors[level].map((color) => {
+  const { colors, paletteName, emoji } = palette;
+  const colorBoxes = colors[level].map((color) => {
     return (
       <ColorBox name={color.name} key={color.id} background={color[format]} />
     );
@@ -13,6 +14,10 @@ function Palette({ palette, level, format }) {
   return (
     <div className="Palette">
       <div className="Palette-colors">{colorBoxes}</div>
+      <footer className="Palette-footer">
+        {paletteName}
+        <span className="emoji">{emoji}</span>
+      </footer>
     </div>
   );
 }
