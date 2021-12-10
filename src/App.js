@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import seedColors from "./seedColors";
+import { Route, Switch } from "react-router-dom";
 import Palette from "./Palette";
 import Navbar from "./Navbar";
 import MaterialSnackbar from "./Material/MaterialSnackbar";
@@ -22,6 +23,10 @@ function App() {
     setLevel(level);
   };
 
+  const findPalette = (id) => {
+    return seedColors.find((palette) => palette.id === id);
+  };
+
   return (
     <div className="App">
       <Navbar
@@ -30,11 +35,20 @@ function App() {
         format={format}
         changeFormatHandler={changeFormatHandler}
       />
-      <Palette
-        level={level}
-        palette={generatePalette(seedColors[4])}
-        format={format}
-      />
+      <Switch>
+        <Route exact path="/" render={() => <h1>HOME</h1>} />
+        <Route
+          exact
+          path="/palette/:id"
+          render={(routeProps) => (
+            <Palette
+              level={level}
+              palette={generatePalette(findPalette(routeProps.match.params.id))}
+              format={format}
+            />
+          )}
+        />
+      </Switch>
       <MaterialSnackbar
         message={`Format is now set to ${format.toUpperCase()}`}
         isOpen={snackbarIsOpen}
