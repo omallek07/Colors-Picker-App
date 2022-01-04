@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Palette from "./Palette";
 import Navbar from "./Navbar";
+import { generatePalette } from "./utils/colorHelper";
 import MaterialSnackbar from "./Material/MaterialSnackbar";
 
-const SinglePaletteView = ({ palette }) => {
+const SinglePaletteView = ({ seedColors }) => {
+  const { id } = useParams();
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+
+  const findPalette = (id) => {
+    return seedColors.find((palette) => palette.id === id);
+  };
 
   const changeFormatHandler = (e) => {
     const newFormat = e.target.value;
@@ -17,6 +24,9 @@ const SinglePaletteView = ({ palette }) => {
   const changeLevel = (level) => {
     setLevel(level);
   };
+
+  const palette = generatePalette(findPalette(id));
+
   return (
     <div className="SinglePaletteView">
       <Navbar

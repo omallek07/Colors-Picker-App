@@ -1,5 +1,6 @@
 import React from "react";
 import MiniPalette from "./MiniPalette";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
@@ -34,7 +35,11 @@ const styles = {
 
 const PaletteList = ({ palettes, classes }) => {
   const palettesView = palettes.map((palette) => {
-    return <MiniPalette {...palette} />;
+    return (
+      <Link key={palette.id} to={`/palette/${palette.id}`}>
+        <MiniPalette {...palette} />
+      </Link>
+    );
   });
 
   return (
