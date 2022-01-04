@@ -4,10 +4,15 @@ import ColorBox from "../ColorBox/ColorBox";
 import "./Palette.css";
 
 function Palette({ palette, level, format }) {
-  const { colors, paletteName, emoji } = palette;
+  const { colors, paletteName, emoji, id } = palette;
   const colorBoxes = colors[level].map((color) => {
     return (
-      <ColorBox name={color.name} key={color.id} background={color[format]} />
+      <ColorBox
+        name={color.name}
+        key={color.id}
+        background={color[format]}
+        moreUrl={`/palette/${id}/${color.id}`}
+      />
     );
   });
 

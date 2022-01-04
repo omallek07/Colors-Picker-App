@@ -5,7 +5,7 @@ import Navbar from "./Navbar/Navbar";
 import { generatePalette } from "./utils/colorHelper";
 import MaterialSnackbar from "./Material/MaterialSnackbar";
 
-const SinglePaletteView = ({ seedColors }) => {
+const PaletteView = ({ seedColors }) => {
   const { id } = useParams();
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
@@ -28,7 +28,7 @@ const SinglePaletteView = ({ seedColors }) => {
   const palette = generatePalette(findPalette(id));
 
   return (
-    <div className="SinglePaletteView">
+    <div className="PaletteView">
       <Navbar
         level={level}
         changeLevel={changeLevel}
@@ -45,4 +45,4 @@ const SinglePaletteView = ({ seedColors }) => {
   );
 };
 
-export default SinglePaletteView;
+export default PaletteView;
