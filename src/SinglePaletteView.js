@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Palette from "./Palette";
-import Navbar from "./Navbar";
+import Palette from "./Palette/Palette";
+import Navbar from "./Navbar/Navbar";
 import { generatePalette } from "./utils/colorHelper";
 import MaterialSnackbar from "./Material/MaterialSnackbar";
 

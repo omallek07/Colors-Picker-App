@@ -1,7 +1,7 @@
 import React from "react";
-import Slider from "./Slider";
+import Slider from "../Slider/Slider";
 import { Link } from "react-router-dom";
-import MaterialSelect from "./Material/MaterialSelect";
+import MaterialSelect from "../Material/MaterialSelect";
 import "./Navbar.css";
 
 const Navbar = ({ level, changeLevel, format, changeFormatHandler }) => {
