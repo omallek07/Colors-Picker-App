@@ -16,12 +16,12 @@ function App() {
         <Route
           exact
           path="/palette/:id"
-          element={<PaletteView seedColors={seedColors} />}
+          element={<PaletteView palettes={seedColors} />}
         />
         <Route
           exact
-          path="/palette/:palleteId/:colorId"
-          element={<SingleColorPalette />}
+          path="/palette/:paletteId/:colorId"
+          element={<SingleColorPalette palettes={seedColors} />}
         />
       </Routes>
     </div>
