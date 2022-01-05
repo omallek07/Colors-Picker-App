@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Navbar from "../Navbar/Navbar";
+import MaterialSnackbar from "../Material/MaterialSnackbar";
 import ColorBox from "../ColorBox/ColorBox";
+import PaletteFooter from "../Palette/PaletteFooter";
+import GoBack from "./GoBack";
+
 import { generatePalette } from "../utils/colorHelper";
 import { findPalette } from "../utils/findPalette";
 
 const SingleColorPalette = ({ palettes }) => {
   const { colorId, paletteId } = useParams();
+  const [format, setFormat] = useState("hex");
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
 
   // return all shades of a given color
-  const gatherShades = () => {
+  const gatherShades = (palette) => {
     const shades = [];
-    const palette = generatePalette(findPalette(paletteId, palettes));
 
     for (const levels in palette.colors) {
       const colorMatch = palette.colors[levels].find(
@@ -21,6 +27,7 @@ const SingleColorPalette = ({ palettes }) => {
         shades.push(colorMatch);
       }
     }
+
     return shades.slice(1);
   };
 
@@ -30,19 +37,39 @@ const SingleColorPalette = ({ palettes }) => {
         <ColorBox
           name={color.name}
           key={color.name}
-          background={color["hex"]}
+          background={color[format]}
         />
       );
     });
   };
 
-  const shades = gatherShades();
+  const changeFormatHandler = (e) => {
+    const newFormat = e.target.value;
+    setFormat(newFormat);
+    setSnackbarIsOpen(true);
+  };
+
+  const palette = generatePalette(findPalette(paletteId, palettes));
+  const shades = gatherShades(palette);
   const displayColorboxes = mapColorBoxes(shades);
 
   return (
-    <div className="Palette">
-      <h1>Single Color Palette</h1>
-      <div className="Palette-colors">{displayColorboxes}</div>
+    <div className="SingleColorPalette Palette">
+      <Navbar
+        showSlider={false}
+        format={format}
+        changeFormatHandler={changeFormatHandler}
+      />
+      <div className="Palette-colors">
+        {displayColorboxes}
+        <GoBack id={paletteId} />
+      </div>
+      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji} />
+      <MaterialSnackbar
+        message={`Format is now set to ${format.toUpperCase()}`}
+        isOpen={snackbarIsOpen}
+        isOpenHandler={setSnackbarIsOpen}
+      />
     </div>
   );
 };

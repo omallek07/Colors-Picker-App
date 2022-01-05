@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ColorBox.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import chroma from "chroma-js";
 import { Link } from "react-router-dom";
 
 function ColorBox(props) {
@@ -12,10 +13,14 @@ function ColorBox(props) {
   };
 
   const { name, background, moreUrl } = props;
+  const isDarkColor = chroma(background).luminance() <= 0.08;
 
   return (
     <CopyToClipboard text={background} onCopy={changeCopyState}>
-      <div style={{ background: background }} className="ColorBox">
+      <div
+        style={{ background: background }}
+        className={`ColorBox ${isDarkColor ? "ColorDark" : "ColorLight"}`}
+      >
         <div
           className={`copy-overlay ${copied && "show"}`}
           style={{ background: background }}
@@ -32,7 +37,7 @@ function ColorBox(props) {
         </div>
         {moreUrl && (
           <Link to={moreUrl} onClick={(e) => e.stopPropagation()}>
-            <span className="see-more">More</span>
+            <span className="see-more">MORE</span>
           </Link>
         )}
       </div>

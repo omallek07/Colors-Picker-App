@@ -27,6 +27,7 @@ const PaletteView = ({ palettes }) => {
   return (
     <div className="PaletteView">
       <Navbar
+        showSlider={true}
         level={level}
         changeLevel={changeLevel}
         format={format}

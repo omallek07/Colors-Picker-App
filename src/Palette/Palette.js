@@ -1,6 +1,6 @@
 import React from "react";
 import ColorBox from "../ColorBox/ColorBox";
-
+import PaletteFooter from "./PaletteFooter";
 import "./Palette.css";
 
 function Palette({ palette, level, format }) {
@@ -19,10 +19,7 @@ function Palette({ palette, level, format }) {
   return (
     <div className="Palette">
       <div className="Palette-colors">{colorBoxes}</div>
-      <footer className="Palette-footer">
-        {paletteName}
-        <span className="emoji">{emoji}</span>
-      </footer>
+      <PaletteFooter paletteName={paletteName} emoji={emoji} />
     </div>
   );
 }
